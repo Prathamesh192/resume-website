@@ -1,0 +1,21 @@
+{
+  "name": "Prathmesh Sharad Nagle",
+  "title": "Technical Solutions Engineer | Aspiring DevOps Engineer",
+  "summary": "With 3+ years of experience in Java, Linux, Docker, MySQL, and Python scripting. Skilled in AWS, Jenkins, Terraform, and Kubernetes. Passionate about automation and scalable DevOps solutions.",
+  "contact": {
+    "email": "nagleprathmesh19@gmail.com",
+    "phone": "+91-8450974494",
+    "linkedin": "https://www.linkedin.com/in/prathmesh-nagle-690a2b1ba/"
+  },
+  "skills": ["Linux", "Docker", "Kubernetes", "Terraform", "Jenkins", "AWS", "Python", "Git", "CI/CD"],
+  "projects": [
+    {
+      "name": "Notes App",
+      "description": "Developed a Django-based CRUD app, containerized using Docker, and deployed on AWS EC2."
+    },
+    {
+      "name": "Smart CCTV Surveillance",
+      "description": "Created a Python OpenCV-based CCTV app with noise detection and face recognition."
+    }
+  ]
+}
