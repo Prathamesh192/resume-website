@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
-        IMAGE_NAME = "prathmeshnagle/resume-website"
+        IMAGE_NAME = "psn19/resume-website"
     }
 
     stages {
