@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = "psn19/resume-website:latest"
+        CONTAINER_NAME = "resumeapp"
+        PORT = "5000"
+    }
+
+    stages {
+        stage('Approval') {
+            steps {
+                input message: 'Deploy to production?', ok: 'Deploy Now'
+            }
+        }
+
+        stage('Pull latest image') {
+            steps {
+                echo "Pulling latest Docker image from Docker Hub..."
+                bat """
+                    docker pull ${DOCKER_IMAGE}
+                """
+            }
+        }
+
+        stage('Stop & Remove old container') {
+            steps {
+                echo "Stopping old container if it exists..."
+                bat """
+                    docker stop ${CONTAINER_NAME} || exit 0
+                    docker rm ${CONTAINER_NAME} || exit 0
+                """
+            }
+        }
+
+        stage('Run new container') {
+            steps {
+                echo "Starting new container..."
+                bat """
+                    docker run -d -p ${PORT}:${PORT} --name ${CONTAINER_NAME} ${DOCKER_IMAGE}
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Deployment completed successfully!"
+        }
+        failure {
+            echo "❌ Deployment failed. Check Jenkins logs."
+        }
+    }
+}
