@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
-        IMAGE_NAME = "psn19/resume-website"
+        IMAGE_NAME = "prathmeshnagle/resume-website"
     }
 
     stages {
@@ -17,21 +17,21 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo '🐳 Building Docker image...'
-                sh 'docker build -t $IMAGE_NAME:latest .'
+                bat 'docker build -t %IMAGE_NAME%:latest .'
             }
         }
 
         stage('Login to Docker Hub') {
             steps {
                 echo '🔐 Logging into Docker Hub...'
-                sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+                bat 'echo %DOCKERHUB_CREDENTIALS_PSW% | docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin'
             }
         }
 
         stage('Push Docker Image') {
             steps {
                 echo '🚀 Pushing Docker image to Docker Hub...'
-                sh 'docker push $IMAGE_NAME:latest'
+                bat 'docker push %IMAGE_NAME%:latest'
             }
         }
     }
